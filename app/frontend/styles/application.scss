@@ -1,0 +1,85 @@
+$yellow: #FFC857;
+$blue: #2E4052;
+$green: #BDD9BF;
+$white: #ffffff;
+$purple: #412234;
+.centerDiv{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 480px;
+    background-color: $yellow;
+    padding: 2rem 2rem;
+    padding-bottom: 4rem;
+    box-shadow: 5px 5px 10px #aaa, -5px -5px 10px #fff;
+    border-radius: 5px;
+    h2{
+      color: $blue;
+      font-weight: bold;
+    }
+}
+.is-fullwidth{
+    width:100%;
+}
+body{
+    background-color: #fff;
+}
+
+.field{
+    margin-top: 1rem;
+    .label{
+      @apply .block;
+      color: $blue;
+    }
+    .input{
+      @apply .px-3 .py-2 mt-1;
+      background-color: transparent;
+      border-bottom: 1px solid $blue;
+      padding: 0;
+      width: 100%;
+      color: $blue;
+
+      &:focus {
+        @apply .outline-none;
+        background-color: $yellow;
+      }
+    }
+
+}
+.regis-button {
+  @apply .bg-gray-300 .px-3 .py-2;
+  width:100%;
+  border-radius: 50px;
+  margin-top: 1rem;
+  background-color: $blue;
+  color: white;
+}
+.has-text-align{
+  text-align: center;
+}
+.bg-yellow{
+  background-color: $yellow;
+}
+.is-yellow{
+  color: $yellow;
+}
+.is-blue{
+  color: $blue;
+}
+.align-right{
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  color: #fff;
+}
+
+nav{
+  .nav-btn{
+    @apply .px-3 .py-2 rounded;
+    cursor: pointer;
+    &:hover {
+      background-color: #F8EFBA;
+    }
+  }
+}
