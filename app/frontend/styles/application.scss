@@ -23,7 +23,7 @@ $purple: #412234;
     width:100%;
 }
 body{
-    background-color: #fff;
+    background-color: #EBECF0;
 }
 
 .field{
@@ -64,8 +64,20 @@ body{
 .is-yellow{
   color: $yellow;
 }
+.bg-green{
+  background-color: $green
+}
+.bg-blue{
+  background-color: $blue
+}
 .is-blue{
   color: $blue;
+}
+.is-white{
+  color: #fff;
+}
+.is-light-yellow{
+  background-color: #f7d794;
 }
 .align-right{
   position: absolute;
