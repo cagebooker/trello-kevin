@@ -3,7 +3,10 @@
   <div class="list px-3 py-2 mx-2 w-64 rounded">
     <h2 class=" py-1 font-bold">{{list.name}}</h2>
     <div class="mt-2">
-      <Card v-for="card in list.cards" :card="card" :key="card.id"></Card>
+      <Draggable v-model="list.cards" ghost-class="ghost-card" group="list" @change="cardMoved">
+        <Card v-for="card in list.cards" :card="card" :key="card.id"></Card>
+      </Draggable>
+
     </div>
     <div class="input-area">
       <button class="button btn-shadow px-3 py-1 font-semibold .text-sm .rounded" @click="editingCard" v-if="!editing">新增卡片</button>
@@ -18,6 +21,7 @@
 <script>
 import Card from "components/card"
 import Rails from '@rails/ujs'
+import Draggable from 'vuedraggable'
 export default{
     name: 'List',
     props: ["list"],
@@ -28,8 +32,32 @@ export default{
           cards: this.list.cards
         }
     },
-    components: { Card },
+    components: { Card, Draggable },
     methods: {
+      cardMoved(event){
+        let evt = event.added || event.moved
+        if(evt){
+          let el = evt.element;
+          let card_id = el.id;
+
+          let data = new FormData()
+          data.append("card[position]", evt.nexIndex + 1)
+          data.append("card[list_id]", this.list.id)
+
+          Rails.ajax({
+            url: `/cards/${card_id}/move`,
+            type: 'PUT',
+            data,
+            dataType: 'json',
+            success: res => {
+              console.log(res)
+            },
+            error: err => {
+              console.log(err)
+            }
+          })
+        }
+      },
       createCard(evt){
         evt.preventDefault()
         // console.log(this.content)
@@ -64,6 +92,9 @@ export default{
 }
 </script>
 <style lang="scss" scoped>
+.ghost-card{
+  @apply .border-2 .border-gray-400 .border-dashed .bg-gray-200
+}
 .list{
   background-color: #f7d794;
 

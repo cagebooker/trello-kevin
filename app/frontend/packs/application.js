@@ -21,6 +21,8 @@ import 'styles'
 
 import Vue from 'vue/dist/vue.esm';
 import List from 'components/list';
+import Draggable from 'vuedraggable'
+import Rails from '@rails/ujs'
 
 document.addEventListener("turbolinks:load", function(event){
     let el = document.querySelector('#board');
@@ -30,7 +32,29 @@ document.addEventListener("turbolinks:load", function(event){
         data:{
           lists: JSON.parse(el.dataset.lists)
         },
-        components:{List}
+        components:{List, Draggable},
+        methods:{
+          listMoved(evt){
+            //console.log(evt)
+            //打API
+            let data = new FormData()
+            data.append("list[position]",evt.moved.newIndex + 1)
+
+            Rails.ajax({
+              // 打到指定的list上
+              url: `lists/${evt.moved.oldIndex + 1}/move`,
+              type: 'PUT',
+              data,
+              dataType: 'json',
+              success: res => {
+                console.log(res)
+              },
+              error: err => {
+                console.log(err)
+              }
+            })
+          }
+        }
       })
     }
 })
