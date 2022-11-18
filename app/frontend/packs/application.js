@@ -23,50 +23,33 @@ import Vue from 'vue/dist/vue.esm';
 import List from 'components/list';
 import Draggable from 'vuedraggable'
 import Rails from '@rails/ujs'
+import store from 'stores/list.js'
 
 document.addEventListener("turbolinks:load", function(event){
     let el = document.querySelector('#board');
     if(el){
       new Vue({
         el,
-        data:{
-          lists: []
+        store,
+        computed: {
+          lists: {
+            get(){
+              return this.$store.state.lists
+            },
+            set(value){
+              this.$store.commit('UPDATE_LISTS',value)
+            }
+          }
         },
         components:{List, Draggable},
         methods:{
           listMoved(evt){
             //console.log(evt)
-            //打API
-            let data = new FormData()
-            data.append("list[position]",evt.moved.newIndex + 1)
-
-            Rails.ajax({
-              // 打到指定的list上
-              url: `lists/${evt.moved.oldIndex + 1}/move`,
-              type: 'PUT',
-              data,
-              dataType: 'json',
-              success: res => {
-                console.log(res)
-              },
-              error: err => {
-                console.log(err)
-              }
-            })
+            this.$store.dispatch('moveList',evt)
           }
         },
         beforeMount(){
-          Rails.ajax({
-            url: '/lists.json',
-            type: 'GET',
-            dataType: 'json',
-            success: res => {
-              this.lists = res
-            },
-            error: err => {
-              console.log(err)
-            }
-          })
+          this.$store.dispatch('loadList')
         }
       })
     }
