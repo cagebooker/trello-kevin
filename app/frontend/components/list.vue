@@ -1,12 +1,11 @@
 
 <template>
-  <div class="list px-3 py-2 mx-2 w-64 rounded">
+  <div class="list px-3 py-2 mx-2 w-64 rounded flex-none h-full">
     <h2 class=" py-1 font-bold">{{list.name}}</h2>
     <div class="mt-2">
       <Draggable v-model="list.cards" ghost-class="ghost-card" group="list" @change="cardMoved">
         <Card v-for="card in list.cards" :card="card" :key="card.id"></Card>
       </Draggable>
-
     </div>
     <div class="input-area">
       <button class="button btn-shadow px-3 py-1 font-semibold .text-sm .rounded" @click="editingCard" v-if="!editing">新增卡片</button>
@@ -35,14 +34,21 @@ export default{
     components: { Card, Draggable },
     methods: {
       cardMoved(event){
-        let evt = event.added || event.moved
+        console.log('here')
+        let evt = event.added || event.moved; //有問題
         if(evt){
           let el = evt.element;
           let card_id = el.id;
-
+          console.log(evt.newIndex)
           let data = new FormData()
-          data.append("card[position]", evt.nexIndex + 1)
+          data.append("card[position]", evt.newIndex + 1)
           data.append("card[list_id]", this.list.id)
+          console.log(this.list.id)
+          console.log(data)
+          // formData inspect
+          // for (var pair of data.entries()) {
+          //     console.log(pair[0]+ ', ' + pair[1]);
+          // }
 
           Rails.ajax({
             url: `/cards/${card_id}/move`,
@@ -50,7 +56,7 @@ export default{
             data,
             dataType: 'json',
             success: res => {
-              console.log(res)
+              // console.log(res)
             },
             error: err => {
               console.log(err)

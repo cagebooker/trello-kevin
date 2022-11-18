@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :cards do
+  resources :cards, only: [:create, :update, :destroy] do
     member do
       put :move
     end

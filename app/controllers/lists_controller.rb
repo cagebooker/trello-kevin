@@ -9,18 +9,6 @@ class ListsController < ApplicationController
     @list.insert_at(list_params[:position].to_i)
     render 'show.json'
   end
-  # GET /lists/1 or /lists/1.json
-  def show
-  end
-
-  # GET /lists/new
-  def new
-    @list = List.new
-  end
-
-  # GET /lists/1/edit
-  def edit
-  end
 
   # POST /lists or /lists.json
   def create
