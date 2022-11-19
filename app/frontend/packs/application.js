@@ -24,6 +24,7 @@ import List from 'components/list';
 import Draggable from 'vuedraggable'
 import Rails from '@rails/ujs'
 import store from 'stores/list.js'
+import Newlist from 'components/newlist'
 
 document.addEventListener("turbolinks:load", function(event){
     let el = document.querySelector('#board');
@@ -41,7 +42,7 @@ document.addEventListener("turbolinks:load", function(event){
             }
           }
         },
-        components:{List, Draggable},
+        components:{List, Draggable, Newlist},
         methods:{
           listMoved(evt){
             //console.log(evt)

@@ -1,7 +1,12 @@
 
 <template>
   <div class="list px-3 py-2 mx-2 w-64 rounded flex-none h-full">
-    <h2 class=" py-1 font-bold">{{list.name}}</h2>
+    <header>
+      <h2 class=" py-1 font-bold">{{list.name}}</h2>
+      <a href="#" @click="deleteList">
+        <i class="fa-solid fa-trash"></i>
+      </a>
+    </header>
     <div class="mt-2">
       <Draggable v-model="list.cards" ghost-class="ghost-card" group="list" @change="cardMoved">
         <Card v-for="card in list.cards" :card="card" :key="card.id"></Card>
@@ -93,6 +98,12 @@ export default{
       cancelCard(evt){
         evt.preventDefault()
         this.editing = false
+      },
+      deleteList(evt){
+        evt.preventDefault()
+        if(confirm('確認刪除這張列表？')){
+          this.$store.dispatch('removeList',this.list.id)
+        }
       }
     }
 }
@@ -132,5 +143,8 @@ export default{
       box-shadow: 5px 5px 10px #aaa, -5px -5px 10px #FFC857;
     }
   }
+}
+header{
+  @apply .flex .justify-between .items-center;
 }
 </style>

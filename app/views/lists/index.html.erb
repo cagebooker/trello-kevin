@@ -1,5 +1,6 @@
 <div id="board" class="mt-2 px-1">
   <Draggable class="flex" v-model="lists" @change="listMoved">
     <List v-for="list in lists" :list="list" :key="list.id"></List>
+    <Newlist></Newlist>
   </Draggable>
 </div>
