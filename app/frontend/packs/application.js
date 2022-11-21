@@ -29,6 +29,7 @@ import Newlist from 'components/newlist'
 document.addEventListener("turbolinks:load", function(event){
     let el = document.querySelector('#board');
     if(el){
+      window.$store = store;
       new Vue({
         el,
         store,
