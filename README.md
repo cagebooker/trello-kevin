@@ -1,24 +1,12 @@
-# README
+仿 Trello 網站，跟著龍哥的教學影片手刻一遍。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+網站功能
+1. 會員系統
+2. list CRUD
+3. Card CRUD
+4. list和card可使用拖拉排序
+5. 即時互動功能(Action cable)
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+網站技術
+1. gem Devise
+2. 
