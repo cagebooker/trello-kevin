@@ -8,5 +8,12 @@
 5. 即時互動功能(Action cable)
 
 網站技術
-1. gem Devise
-2. 
+1. gem Devise （客製化 views controller）
+2. TailwindCss
+3. Vuedraggable套件
+4. vue
+  - vue使用（version2）
+  - components
+  - lifecycle
+5. vuex
+6. actionCable 即時通訊
